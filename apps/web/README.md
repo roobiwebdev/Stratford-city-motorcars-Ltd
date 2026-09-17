@@ -4,8 +4,8 @@ The public website for Stratford City Motorcars, 21–25 Romford Road, Stratford
 London E15 4LJ. Next.js 16 (App Router, Turbopack), React 19, Tailwind v4,
 Drizzle + Postgres.
 
-The staff dashboard (login, stock editor, photo upload, enquiries) has been
-removed and is to be rebuilt.
+The dealership admin is a separate app, `apps/admin` (frontend built, API
+pending — see [docs/STRATFORD_ADMIN_CONTRACT.md](../../docs/STRATFORD_ADMIN_CONTRACT.md)).
 
 - **How it works:** [docs/STRATFORD_ARCHITECTURE.md](../../docs/STRATFORD_ARCHITECTURE.md)
 - **What is done, what is waiting, launch blockers:** [docs/STRATFORD_BUILD_STATUS.md](../../docs/STRATFORD_BUILD_STATUS.md)
@@ -118,7 +118,7 @@ The app assumes a long-running Node server (`next build` then `next start`)
 with a persistent volume for `MEDIA_ROOT`. Before going live, work through the
 launch blockers and external setup in
 [STRATFORD_BUILD_STATUS.md](../../docs/STRATFORD_BUILD_STATUS.md). In short:
-a way to manage stock (the dashboard rebuild), production Postgres with
+a way to manage stock (the admin's API), production Postgres with
 migrations applied, persistent media storage, an enquiry notification
 destination, approved legal pages, the canonical domain, and confirmed stock
 with dealer photography.

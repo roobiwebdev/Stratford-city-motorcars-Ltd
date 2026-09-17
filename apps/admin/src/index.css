@@ -1,0 +1,135 @@
+@import "@Stratford-city-motorcars-Ltd/ui/globals.css";
+
+/* `@source` globs resolve from the file that declares them. */
+@source "./**/*.{ts,tsx}";
+
+/*
+ * ---------------------------------------------------------------------------
+ * Stratford City Motorcars — admin
+ * ---------------------------------------------------------------------------
+ * The website's system at working size. Same warm ink/bone palette, the one
+ * brass accent, 2px corners and the same three typefaces — but denser type,
+ * shorter controls and quieter headings, because this is where the stock is
+ * written up, not where it is shown off.
+ *
+ * The sidebar is the website's ink surface (`data-surface="dark"`); the
+ * workspace is paper with white panels, which is easier on the eyes through
+ * a long session of data entry.
+ * ---------------------------------------------------------------------------
+ */
+
+@layer base {
+  html:has([data-admin]) {
+    background-color: var(--color-paper);
+    scroll-behavior: auto;
+  }
+
+  [data-admin] {
+    font-size: 0.875rem;
+  }
+
+  /* Headings in the admin are working titles, not editorial statements. */
+  [data-admin] h1,
+  [data-admin] h2,
+  [data-admin] h3 {
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer components {
+  /* Small tracked label: table headers, field labels, definition terms. */
+  .admin-label {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+  }
+
+  /* Roman capitals for panel titles and page eyebrows — the logo's echo. */
+  .admin-eyebrow {
+    font-family: var(--font-roman);
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rule);
+  }
+
+  /* Placeholder frame for sample photographs. */
+  .sample-frame {
+    background-color: var(--color-ink-150);
+    background-image: repeating-linear-gradient(
+      135deg,
+      transparent 0 10px,
+      color-mix(in oklab, var(--color-ink-250) 45%, transparent) 10px 11px
+    );
+  }
+}
+
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+/* Sheets and drawers slide; centred dialogs fade and lift slightly. */
+@layer utilities {
+  dialog[data-variant] {
+    opacity: 0;
+    transition:
+      opacity 0.22s var(--ease-out-expo),
+      translate 0.28s var(--ease-out-expo),
+      overlay 0.28s allow-discrete,
+      display 0.28s allow-discrete;
+  }
+
+  dialog[data-variant][open] {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  dialog[data-variant="center"] {
+    translate: 0 8px;
+  }
+
+  dialog[data-variant="sheet"] {
+    translate: 24px 0;
+  }
+
+  dialog[data-variant="drawer"] {
+    translate: -24px 0;
+  }
+
+  @starting-style {
+    dialog[data-variant][open] {
+      opacity: 0;
+    }
+    dialog[data-variant="center"][open] {
+      translate: 0 8px;
+    }
+    dialog[data-variant="sheet"][open] {
+      translate: 24px 0;
+    }
+    dialog[data-variant="drawer"][open] {
+      translate: -24px 0;
+    }
+  }
+
+  dialog[data-variant]::backdrop {
+    background-color: rgb(10 10 11 / 0);
+    transition:
+      background-color 0.22s var(--ease-out-expo),
+      overlay 0.22s allow-discrete,
+      display 0.22s allow-discrete;
+  }
+
+  dialog[data-variant][open]::backdrop {
+    background-color: rgb(10 10 11 / 0.55);
+  }
+
+  @starting-style {
+    dialog[data-variant][open]::backdrop {
+      background-color: rgb(10 10 11 / 0);
+    }
+  }
+}

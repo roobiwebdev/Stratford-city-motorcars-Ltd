@@ -12,6 +12,7 @@
     "inventory:import-seed": "bun scripts/import-seed.ts"
   },
   "dependencies": {
+    "@Stratford-city-motorcars-Ltd/core": "workspace:*",
     "@Stratford-city-motorcars-Ltd/db": "workspace:*",
     "@Stratford-city-motorcars-Ltd/env": "workspace:*",
     "@Stratford-city-motorcars-Ltd/ui": "workspace:*",

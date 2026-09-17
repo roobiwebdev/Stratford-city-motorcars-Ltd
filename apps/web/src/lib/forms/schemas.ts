@@ -1,3 +1,4 @@
+import type { EnquiryPayload } from "@Stratford-city-motorcars-Ltd/core/enquiry";
 import { z } from "zod";
 
 import {
@@ -205,3 +206,15 @@ export type LeadInput = VehicleEnquiryInput | FinanceInput | PartExchangeInput |
 export type LeadKind = LeadInput["kind"];
 
 export type { FormState } from "./options";
+
+// ---- Contract with the admin ------------------------------------------------------------
+
+/**
+ * The admin reads stored submissions as `EnquiryPayload` (packages/core). The
+ * stored payload is a submission minus the honeypot, so it must stay
+ * assignable — change a form here and this stops compiling until the shared
+ * shape is updated too.
+ */
+type StoredPayload = LeadInput extends infer Input ? (Input extends LeadInput ? Omit<Input, "website"> : never) : never;
+const _storedPayloadMatchesAdmin: (value: StoredPayload) => EnquiryPayload = (value) => value;
+void _storedPayloadMatchesAdmin;

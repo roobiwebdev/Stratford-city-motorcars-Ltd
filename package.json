@@ -15,7 +15,8 @@
     "db:push": "turbo run db:push -F @Stratford-city-motorcars-Ltd/db --",
     "db:studio": "turbo run db:studio -F @Stratford-city-motorcars-Ltd/db --",
     "db:generate": "turbo run db:generate -F @Stratford-city-motorcars-Ltd/db --",
-    "db:migrate": "turbo run db:migrate -F @Stratford-city-motorcars-Ltd/db --"
+    "db:migrate": "turbo run db:migrate -F @Stratford-city-motorcars-Ltd/db --",
+    "dev:admin": "turbo run dev -F admin --"
   },
   "dependencies": {
     "@Stratford-city-motorcars-Ltd/env": "workspace:*",

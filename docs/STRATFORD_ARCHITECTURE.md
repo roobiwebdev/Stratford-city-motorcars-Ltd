@@ -1,7 +1,9 @@
 # Stratford City Motorcars — architecture
 
-How the public website works. The staff dashboard and staff authentication
-have been removed and are to be rebuilt; nothing here depends on them. For what is finished,
+How the public website and the admin work. The admin's frontend is built and
+runs on in-browser sample data; the API it needs is specified in
+[STRATFORD_ADMIN_CONTRACT.md](./STRATFORD_ADMIN_CONTRACT.md), and nothing on
+the website depends on it. For what is finished,
 what is waiting on the client and what must be set up before launch, see
 [STRATFORD_BUILD_STATUS.md](./STRATFORD_BUILD_STATUS.md). For how the legacy
 site and the client intake shaped the content, see
@@ -12,8 +14,12 @@ site and the client intake shaped the content, see
 ```text
 apps/web            Next.js 16 (App Router). Public site, media delivery,
                     enquiry handling.
+apps/admin          Next.js 16 (App Router). The dealership admin, on its own
+                    origin. Sample data until the API exists.
 apps/server         Hono. Better-T-Stack template API (/api/auth). Not used by
                     the website.
+packages/core       The shared contract: vehicle model, publishing rules,
+                    formatters, and every admin type, status and permission.
 packages/db         Drizzle schema + migrations: vehicle, lead, auth tables.
 packages/auth       Better-T-Stack template auth config, used only by apps/server.
 packages/env        Typed environment validation.
@@ -22,7 +28,7 @@ packages/ui         Design tokens and shared primitives.
 
 One Next.js app serves everything a visitor touches. There is one source of
 truth for stock — the `vehicle` table — read by the public pages. The store
-interface can write, ready for a rebuilt dashboard.
+interface can write, ready for the admin's API.
 
 ### Two runtime modes
 
@@ -118,8 +124,9 @@ existing ids are left alone).
 
 Code: `apps/web/src/lib/media/storage.ts`, `src/app/media/[...path]/route.ts`.
 
-There is no upload tool: it was part of the removed dashboard. Media is
-described on each record's `media` array.
+The admin's photo manager uploads through the API contract; the server side
+of that upload is not built yet. Media is described on each record's `media`
+array.
 
 - **Photographs**: each carries a category (exterior, interior, detail,
   documents), width and height, alt text, `provenance` (`dealer` or `library`)
@@ -166,9 +173,9 @@ form → server action → Zod validation → spam checks → deliverLead()
   none is wired. The webhook (`LEADS_WEBHOOK_URL`, optional bearer
   `LEADS_WEBHOOK_TOKEN`) can be pointed at Zapier/Make/n8n today. A new channel
   is a `LeadNotifier` added to `configuredNotifiers()` in `notify.ts`.
-- **Reading stored enquiries**: there is no screen for them yet (the dashboard
-  was removed). They are in the `lead` table with a `status` column defaulting
-  to `new`.
+- **Reading stored enquiries**: the admin's enquiry screens are built against
+  the contract; until the API exists, stored enquiries are in the `lead` table
+  with a `status` column defaulting to `new`.
 
 ## SEO
 
@@ -228,3 +235,47 @@ Nothing behind a switch renders until every part of it is set.
   rules, POA, featured selection, sold and archived handling, alt text and the
   legacy slugs. It fails if the price floor, the photography requirement or the
   featured rule is weakened.
+
+## Shared contract
+
+Code: `packages/core/src/`.
+
+`vehicle.ts` (the record and public shapes), `visibility.ts` (publishing rules)
+and `format.ts` moved here from the web app so the admin shows exactly the
+rules the website enforces. `apps/web/src/lib/inventory/types.ts`,
+`visibility.ts` and `apps/web/src/lib/format.ts` re-export them, so website
+imports and `check-inventory` are unchanged. `visibility.ts` must keep to
+type-only imports: the inventory check loads it with Node's type stripping.
+
+The rest of the package is the admin's contract: stock, enquiries,
+appointments, customers, team, settings, the overview, roles and capabilities,
+list paging, errors and the `AdminApi` interface. The web app's form schemas
+include a compile-time check that a stored enquiry payload still matches the
+shape the admin reads.
+
+## Admin
+
+Code: `apps/admin/`. Details: [apps/admin/README.md](../apps/admin/README.md);
+backend requirements: [STRATFORD_ADMIN_CONTRACT.md](./STRATFORD_ADMIN_CONTRACT.md).
+
+```text
+screen → TanStack Query → AdminApi ─┬─ mock (in-browser sample data, default)
+                                    └─ http (/api/admin/*, NEXT_PUBLIC_ADMIN_DATA=api)
+```
+
+- **Separate app, separate origin** (port 3002), never indexed, never framed.
+  It needs an API that owns sessions, roles and writes; it never reads the
+  database itself.
+- **Security** lives in the API. The admin hides what a role cannot do
+  (`can()`), and the API refuses it on every request. Roles: owner and staff.
+- **Screens**: overview; stock list and editor (publishing panel, photo
+  manager, reserve, sell, archive); enquiries and detail (status, handler,
+  notes, valuation, delete); part-exchange queue; viewings and test drives
+  diary; customers; team; settings.
+- **Honest by design**: no screen claims to contact a customer. Replies happen
+  through call, WhatsApp and email links; the admin records what happened.
+- **Concurrency**: every write carries the `updatedAt` it read; a mismatch is
+  shown as "someone else saved this", never silently overwritten.
+- **Website cache**: stock changes must revalidate the website's `inventory`
+  tag through a secret-protected route on the website (not built yet).
+

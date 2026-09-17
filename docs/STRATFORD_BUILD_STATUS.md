@@ -3,6 +3,7 @@
 Branch `feat/phase-1-9-build`, September 2026. Not merged, pushed or deployed.
 
 Related: [architecture](./STRATFORD_ARCHITECTURE.md) ·
+[admin contract](./STRATFORD_ADMIN_CONTRACT.md) ·
 [migration audit](./STRATFORD_MIGRATION_AUDIT.md) ·
 [web app README](../apps/web/README.md)
 
@@ -10,12 +11,12 @@ Everything under **Completed** was exercised against a production build
 (`next build` + `next start`), not only type-checked. Results are in
 [Verification record](#verification-record).
 
-> **Staff dashboard removed.** A dashboard (login, inventory editor, media
-> upload, enquiries) was built in Phase 9 and then removed on request, to be
-> rebuilt. The login page, dashboard, `/api/auth`, the upload
-> API and the owner-account script no longer exist; `/login`, `/dashboard` and
-> `/admin` return 404. The public website was re-verified after the removal and
-> is unchanged.
+> **Admin rebuilt as its own app (frontend).** The Phase 9 dashboard inside the
+> web app was removed on request. A new admin now lives in `apps/admin`
+> (branch `feat/admin-dashboard`): every screen is built and runs on
+> in-browser sample data. The API it needs is specified in
+> [STRATFORD_ADMIN_CONTRACT.md](./STRATFORD_ADMIN_CONTRACT.md) and is not
+> built. The website still has no `/login`, `/dashboard` or `/admin` routes.
 
 ---
 
@@ -45,6 +46,29 @@ Everything under **Completed** was exercised against a production build
   archived lifecycle, reserved, hand-picked featured, POA sorting, make/model
   filters, price high-to-low default.
 - The seven legacy records imported as unconfirmed drafts; old slugs preserved.
+
+### Admin frontend
+
+- `apps/admin`: separate Next.js app (port 3002), noindex, security headers,
+  on the website's design system at working size.
+- Screens: sign in; overview (new enquiries, today's viewings, cars held off the
+  website, listings to finish, stock figures); stock list with status tabs,
+  search, make filter, sort and lifecycle actions; vehicle editor with seven
+  sections, live publishing panel linked to the website's own rules, photo
+  manager (upload with progress and size check, categories, descriptions,
+  cover, reorder, remove, YouTube/Vimeo and 360° links), reserve, mark sold,
+  archive, duplicate; enquiries with status tabs, filters, search and paging;
+  enquiry detail with contact links, submission by form type, status and
+  reason, handler, notes timeline, part-exchange valuation, arrange a viewing,
+  delete for spam or erasure; part-exchange queue; viewings and test drives
+  week diary and phone agenda; customers and customer history; team with
+  invite, role change and deactivation; settings with business details, hours,
+  notification and compliance status.
+- Owner and staff roles, shown and hidden per capability.
+- `packages/core`: shared contract; website re-exports keep its imports.
+- Sample data implements the whole contract in the browser, including
+  sessions, role refusals, version conflicts and validation, with controls for
+  slow and failing requests.
 
 ### Public site (Phase 3)
 
@@ -171,7 +195,7 @@ assumed.
 
 | Item | Needed for | Notes |
 | --- | --- | --- |
-| Staff dashboard | Editing stock, photos, reading enquiries | Removed; to be rebuilt |
+| Admin API | Stock, photos, enquiries, viewings, customers, team and settings from the admin | Frontend built on sample data; API specified in the admin contract, not built |
 | Production Postgres | Inventory, enquiries | Run `pnpm --filter @Stratford-city-motorcars-Ltd/db db:migrate` (the root `pnpm db:migrate` goes through turbo, which needs an interactive terminal), then optionally `pnpm --filter web inventory:import-seed` |
 | Persistent media storage | Vehicle photos and video | Local disk today (`MEDIA_ROOT`). Needs a host with a persistent volume, or an object-storage implementation of `MediaStorage` |
 | Hosting | Everything | A long-running Node server (`next start`) is assumed. Serverless hosting needs object storage and a shared rate limiter first |
@@ -188,8 +212,8 @@ assumed.
 
 The site should not go live until these are resolved:
 
-1. **No way to manage stock.** The dashboard was removed; there is no tool for
-   adding cars, photographs or reading enquiries.
+1. **No way to manage stock yet.** The admin's screens exist but run on sample
+   data until its API is built (see the admin contract).
 2. **No confirmed stock.** Every record is a draft and no car has dealer
    photography, so the public site would show no cars.
 3. **Legal pages are placeholders.** The forms collect names, emails and phone
@@ -231,6 +255,24 @@ The site should not go live until these are resolved:
 Run on Linux (Node 26.8.1, pnpm 11.3.0, Chromium via puppeteer-core, axe-core,
 Lighthouse), against local Postgres 18 (PGlite) with test fixtures that exist
 only in the local test database.
+
+### Admin frontend (September 2026, macOS, Node 24, Chromium via playwright-core, axe-core)
+
+Run against the admin dev server on sample data, and production builds of both
+apps.
+
+| Check | Result |
+| --- | --- |
+| `pnpm check-types` (core, ui, web, admin, server) | Pass |
+| `next build` — admin and web | Pass; web route table unchanged |
+| `check-content` (source and built HTML), `check-inventory` | Pass; 26/26 |
+| Journeys: sign-in redirects and errors, create → validate → upload (undersized refused) → publish, unsaved-changes guard, enquiry status/note/viewing/not-proceeding/delete, reserve and sell with enquiry link, failed load and failed save recovery, staff restrictions, mobile drawer | 28/28 |
+| Horizontal overflow at 390px, 10 screens | None |
+| axe-core (WCAG 2.1 AA + best practice), 13 screens at 1280 and 390 | No violations |
+| Console errors during journeys | None |
+
+Not verified: the HTTP client against a real API (none exists), Safari and
+Firefox, real devices, screen readers beyond axe.
 
 ### After removing the dashboard (current state)
 
