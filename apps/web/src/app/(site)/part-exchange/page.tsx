@@ -43,8 +43,8 @@ export default function PartExchangePage(props: PageProps<"/part-exchange">) {
 
       <PageHero
         eyebrow="Part exchange"
-        title="Your current car can do most of the work"
-        lede="Send us its details and we'll usually come back within 24 hours on weekdays with an initial figure. No obligation at any point."
+        title="Your car can cover most of it"
+        lede="Send us its details. We'll usually come back within 24 hours on weekdays with an initial figure. No obligation."
         crumbs={crumbs}
       />
 

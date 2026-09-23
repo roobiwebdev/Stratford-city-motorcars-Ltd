@@ -173,6 +173,17 @@ export async function SiteFooter() {
                 {site.company.legalName}. Registered in {site.company.registeredIn}, company number{" "}
                 {site.company.number}. Registered office: {site.company.registeredOffice}.
               </p>
+              <p>
+                Built by{" "}
+                <a
+                  href="https://clientreach.ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-bone/80 underline-offset-4 transition-colors hover:text-brass hover:underline"
+                >
+                  ClientReach AI
+                </a>
+              </p>
             </div>
             <nav aria-label="Legal">
               <ul className="flex flex-wrap gap-x-6 gap-y-2">

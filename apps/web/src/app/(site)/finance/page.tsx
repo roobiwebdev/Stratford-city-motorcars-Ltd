@@ -52,7 +52,7 @@ export default function FinancePage(props: PageProps<"/finance">) {
       <PageHero
         eyebrow="Finance"
         title="Finance, explained without the fog"
-        lede="One of the ways you can pay. Here is how Hire Purchase, Personal Contract Purchase and personal loans work."
+        lede="One of the ways you can pay. Here is how the three options work."
         crumbs={crumbs}
       />
 
@@ -124,8 +124,7 @@ export default function FinancePage(props: PageProps<"/finance">) {
               <Eyebrow>Plain English</Eyebrow>
               <h2 className="mt-5 text-[clamp(1.85rem,3.6vw,2.6rem)] leading-tight">The terms you&rsquo;ll see in any quote</h2>
               <p className="mt-5 leading-relaxed text-[var(--muted-foreground)]">
-                Monthly figures depend on the car, your deposit, the term and the lender, so we don&rsquo;t
-                quote them here.
+                Figures depend on the car, your deposit, the term and the lender. So we don&rsquo;t quote them here.
               </p>
             </div>
             <dl className="grid gap-px border border-[var(--border)] bg-[var(--border)] sm:grid-cols-2">
@@ -150,8 +149,8 @@ export default function FinancePage(props: PageProps<"/finance">) {
                 Tell us what works for you
               </h2>
               <p className="mt-5 max-w-lg leading-relaxed text-[var(--muted-foreground)]">
-                The car you&rsquo;re interested in and roughly what you&rsquo;d like to pay. Sending this form
-                doesn&rsquo;t run a credit check, and nothing is applied for without your say-so.
+                Tell us the car and roughly what you&rsquo;d like to pay. No credit check. Nothing is applied
+                for without your say-so.
               </p>
 
               {/* The other ways to pay, in one line, for anyone finance isn't right for. */}

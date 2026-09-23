@@ -46,12 +46,12 @@ const principles = [
   {
     title: "Take your time",
     detail:
-      "Look the car over properly, ask everything you want to ask, come back for a second look.",
+      "Look it over properly. Ask anything. Come back for a second look.",
   },
   {
     title: "The car has to be right",
     detail:
-      "We take pride in our stock, and a car only goes online once it has been photographed inside and out.",
+      "A car goes online once it has been photographed inside and out.",
   },
   {
     title: "You deal with us",
@@ -70,7 +70,7 @@ export default async function AboutPage() {
       <PageHero
         eyebrow="About us"
         title="A small family business"
-        lede="A family-owned business on Romford Road in Stratford, East London, trading in sports and luxury cars."
+        lede="Sports and luxury cars, from a family business on Romford Road in Stratford."
         crumbs={crumbs}
       />
 
@@ -89,9 +89,8 @@ export default async function AboutPage() {
                 </p>
 
                 <p className="text-[var(--muted-foreground)]">
-                  We trade in sports and luxury cars, and we&rsquo;d rather give you an experience than a car
-                  sale. Every price is set by looking at the current market, and people travel from across the
-                  country for the right car — when that&rsquo;s too far, we deliver nationwide.
+                  We trade in sports and luxury cars. Every price is set from the current market. People
+                  travel across the country for the right car — and when that&rsquo;s too far, we deliver.
                 </p>
               </div>
             </div>
@@ -153,8 +152,8 @@ export default async function AboutPage() {
                 Chosen one at a time
               </h2>
               <p className="mt-5 max-w-lg leading-relaxed text-[var(--muted-foreground)]">
-                Our stock changes all the time, and we hold more than we list online. Looking for something in
-                particular? Tell us, and we&rsquo;ll let you know what we have.
+                Stock changes all the time, and we hold more than we list online. Looking for something in
+                particular? Tell us.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <ButtonLink href="/vehicles" size="md">

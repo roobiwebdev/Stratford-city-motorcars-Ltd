@@ -32,14 +32,14 @@ export const faqs: Faq[] = [
     id: "what-cars",
     question: "What cars do you sell?",
     answer:
-      "Sports and luxury cars. Our stock changes all the time and we hold more than we list online, so if you're looking for something in particular, tell us and we'll let you know what we have.",
+      "Sports and luxury cars. Stock changes all the time, and we hold more than we list online. Tell us what you're after.",
     category: "Buying",
     home: true,
   },
   {
     id: "viewing",
     question: "Can I arrange a viewing?",
-    answer: `Yes. Request a viewing from any car's page, call us or message us on WhatsApp, and we'll confirm a time with you. ${site.hours.sentence}`,
+    answer: `Yes. Request one from any car's page, call, or message us on WhatsApp. We'll confirm a time with you. ${site.hours.sentence}`,
     category: "Visiting",
     home: true,
   },
@@ -47,14 +47,14 @@ export const faqs: Faq[] = [
     id: "test-drive",
     question: "Can I book a test drive?",
     answer:
-      "You can request one from the car's page or by getting in touch. Test drives are arranged individually, so we'll confirm the details with you for the car you're interested in.",
+      "Request one from the car's page, or get in touch. Test drives are arranged individually, so we'll confirm the details with you.",
     category: "Visiting",
     home: true,
   },
   {
     id: "out-of-hours",
     question: "Can I view a car outside opening hours?",
-    answer: `Yes. ${site.hours.outOfHours} We'll do our best to find a time that works.`,
+    answer: `Yes. ${site.hours.outOfHours}`,
     category: "Visiting",
     home: true,
   },
@@ -70,14 +70,14 @@ export const faqs: Faq[] = [
     id: "finance-credit-check",
     question: "Does sending a finance enquiry affect my credit score?",
     answer:
-      "No. The enquiry form simply tells us what you're looking for — it doesn't run a credit check. Any finance application is a separate step that you would agree to first.",
+      "No. The form just tells us what you're looking for. Any finance application is a separate step, and you agree to it first.",
     category: "Finance",
   },
   {
     id: "finance-deposit",
     question: "Can my part exchange go towards a finance deposit?",
     answer:
-      "Yes. The agreed value of your part exchange can go towards your deposit, or come straight off the price if you're paying another way.",
+      "Yes. It can go towards your deposit, or straight off the price if you're paying another way.",
     category: "Finance",
   },
   {
@@ -92,21 +92,21 @@ export const faqs: Faq[] = [
     id: "part-exchange-finance",
     question: "Can I part exchange a car that still has finance on it?",
     answer:
-      "Tell us about any outstanding finance when you send the details. It has to be disclosed and settled before a part exchange completes.",
+      "Tell us when you send the details. It has to be settled before a part exchange completes.",
     category: "Part exchange",
   },
   {
     id: "part-exchange-photos",
     question: "Do I need to send photos?",
     answer:
-      "They aren't required, but they help us give an initial figure that's closer to the final one. The easiest way is to send them on WhatsApp.",
+      "Not required. They do make the first figure more accurate. Easiest to send on WhatsApp.",
     category: "Part exchange",
   },
   {
     id: "delivery",
     question: "Can you deliver nationwide?",
     answer:
-      "Yes, we deliver nationwide. A delivery charge may apply depending on the car and where it's going, so ask us for the car you're interested in.",
+      "Yes, nationwide. A charge may apply depending on the car and where it's going — ask us.",
     category: "Buying",
     home: true,
   },
@@ -121,7 +121,7 @@ export const faqs: Faq[] = [
   {
     id: "warranty",
     question: "Do cars come with warranty cover?",
-    answer: `${site.warranty.statement} Whether cover is available, and for how long, depends on the car — ask us about the one you're interested in.`,
+    answer: `${site.warranty.statement} What's available depends on the car — ask us about the one you like.`,
     category: "Buying",
     home: true,
   },

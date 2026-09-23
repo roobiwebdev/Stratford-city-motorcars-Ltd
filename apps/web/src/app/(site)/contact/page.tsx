@@ -74,8 +74,7 @@ export default async function ContactPage() {
               <Eyebrow>Book a viewing</Eyebrow>
               <h2 className="mt-5 text-[clamp(2rem,4vw,2.75rem)] leading-[1.08]">See the car before you decide</h2>
               <p className="mt-5 max-w-lg leading-relaxed text-[var(--muted-foreground)]">
-                Viewings and test drives are requests: tell us which car and when suits you, and we&rsquo;ll
-                confirm a time by phone or WhatsApp.
+                Tell us which car and when suits you. We&rsquo;ll confirm a time by phone or WhatsApp.
               </p>
 
               {/* The hours, the weekend rule and the out-of-hours note are in
@@ -146,8 +145,7 @@ export default async function ContactPage() {
                 Tell us what you need
               </h2>
               <p className="mt-5 max-w-lg leading-relaxed text-[var(--muted-foreground)]">
-                A specific car, a finance question, a part-exchange valuation or
-                anything else — we&rsquo;ll come back to you personally.
+                A car, finance, a valuation, anything else. We come back to you personally.
               </p>
 
               <div className="mt-10 border-t border-[var(--border)] pt-8">
@@ -159,8 +157,7 @@ export default async function ContactPage() {
                   <div>
                     <h3 className="font-medium">Looking for something specific?</h3>
                     <p className="mt-2 text-sm leading-relaxed text-[var(--muted-foreground)]">
-                      We hold more stock than we list online — tell us the make,
-                      model and budget.
+                      We hold more than we list online. Tell us the make, model and budget.
                     </p>
                   </div>
                 </div>

@@ -133,7 +133,7 @@ export function buildSite(business: BusinessDetails = DEFAULT_BUSINESS) {
       short: `${firstDay.slice(0, 3)}–${lastDay.slice(0, 3)} ${openTimes}`,
 
       /** Full sentence for metadata and running copy. */
-      sentence: `We're open ${firstDay} to ${lastDay}, ${openTimes}. Weekends are by appointment only, and on bank holidays and closure days viewings can still be arranged by appointment.`,
+      sentence: `We're open ${firstDay} to ${lastDay}, ${openTimes}. Weekends, bank holidays and closure days are by appointment.`,
 
       outOfHours: business.hours.outOfHoursNote,
     },
@@ -147,9 +147,9 @@ export function buildSite(business: BusinessDetails = DEFAULT_BUSINESS) {
      */
     directions: {
       satNav:
-        "Use E15 4LJ. Some sat navs finish a little before or after the showroom, so look out for numbers 21–25 Romford Road.",
+        "Use E15 4LJ. Some sat navs stop a little before or after us — look for numbers 21–25.",
       onFoot: "From Stratford station, walk to The Broadway and continue east onto Romford Road.",
-      byCar: "Romford Road is the A118, reached from the A11 and A12. There's free parking on site.",
+      byCar: "Romford Road is the A118, off the A11 and A12. Free parking on site.",
     },
 
     transport: {

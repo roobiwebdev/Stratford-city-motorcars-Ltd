@@ -188,7 +188,7 @@ export const financeProducts: FinanceProduct[] = [
     name: "Hire Purchase",
     abbreviation: "HP",
     summary:
-      "The most straightforward way to spread the cost. When the last payment clears, the car is yours.",
+      "Spread the cost. When the last payment clears, the car is yours.",
     points: ["A deposit, then fixed monthly payments", "No mileage limits"],
     ownership: "Transfers to you with the final payment.",
     endOfTerm: "Nothing to decide — the car is yours.",
@@ -198,11 +198,11 @@ export const financeProducts: FinanceProduct[] = [
     name: "Personal Contract Purchase",
     abbreviation: "PCP",
     summary:
-      "Monthly payments are lower because part of the car's value is deferred to the end of the agreement.",
+      "Lower monthly payments. Part of the car's value waits until the end.",
     points: ["A guaranteed minimum future value is agreed up front", "Part-exchange protection"],
     ownership: "Stays with the lender until you settle the final payment.",
     endOfTerm:
-      "Pay the optional final payment and keep it, return it, or use any equity towards your next car.",
+      "Pay the final payment and keep it. Or return it. Or put any equity towards your next car.",
   },
   {
     key: "loan",
@@ -232,7 +232,7 @@ export const financeTerms: Step[] = [
   },
   {
     title: "Final payment",
-    detail: "PCP only. The deferred part of the car's value, due at the end if you keep the car.",
+    detail: "PCP only. The part left until the end, due if you keep the car.",
   },
 ];
 
@@ -250,12 +250,12 @@ export const partExchangeSteps: Step[] = [
   {
     title: "We come back with a figure",
     detail:
-      "Usually within 24 hours on weekdays, by phone or email — an initial valuation based on what you've told us.",
+      "Usually within 24 hours on weekdays, by phone or email. An initial figure, based on what you've told us.",
   },
   {
     title: "It goes towards your next car",
     detail:
-      "Bring it in and we confirm the valuation after a short inspection and a look at the documents. The agreed value comes off the price of your next car.",
+      "Bring it in. We confirm the figure after a short inspection and a look at the documents. The agreed value comes off your next car.",
   },
 ];
 

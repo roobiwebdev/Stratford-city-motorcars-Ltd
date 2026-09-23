@@ -94,7 +94,7 @@ export default async function VehiclesPage(props: PageProps<"/vehicles">) {
         lede={
           summary
             ? `Showing the ${results.length === 1 ? "one car" : `${results.length} cars`} that match. Adjust the filters to widen your search.`
-            : "From a family-owned showroom in Stratford, East London. Every car listed has been photographed inside and out, and we hold more than we list — so if you don't see what you're after, ask."
+            : "A family-owned showroom in Stratford, East London. We hold more than we list — if you don't see it, ask."
         }
         crumbs={crumbs}
       />
